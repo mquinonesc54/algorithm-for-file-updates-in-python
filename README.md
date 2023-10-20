@@ -50,4 +50,40 @@ In Python, a ```for``` loop is utilized to execute a set of code instructions fo
 
 The ```for``` keyword initiates the ```for``` loop, followed by the loop variable, denoted as ```element```, and the ```in``` keyword. The ```in``` keyword signifies the iteration through the ```ip_addresses``` sequence, assigning each value in turn to the loop variable ```element```.
 
-## 
+## Remove IP addresses that are on the remove list
+
+To implement my algorithm, I needed to remove any IP address present in the ```ip_addresses``` allow list, which also appears in the ```remove_list```. Since there were no duplicate IP addresses within ```ip_addresses```, I successfully achieved this using the following code:
+
+![Remove IP that are on remove list](https://i.imgur.com/oTFa7pG.png)
+
+Initially, inside my ```for``` loop, I introduced a condition to check whether the loop variable, ```element```, existed within the ```ip_addresses``` list. This was necessary to avoid errors when using the ```.remove()``` method, as attempting to remove elements not present in ```ip_addresses``` would lead to issues.
+
+Subsequently, within that conditional block, I employed the ```.remove()``` method on the ```ip_addresses list```. I used ```element```, the loop variable, as the argument to ensure that each IP address listed in ```remove_list``` would be successfully deleted from ```ip_addresses```.
+
+## Update the file with the revised list of IP addresses
+
+In the concluding phase of my algorithm, it was crucial to update the allow list file with the modified IP address list. To achieve this, the list had to be converted back into a string representation. To accomplish this conversion, I employed the ```.join()``` method as follows:
+
+![Update the file with the revised list of IP addresses](https://i.imgur.com/QUDMPia.png)
+
+The ```.join()``` method serves the purpose of merging all elements within an iterable into a single string. To use this method effectively, it is applied to a string that specifies the characters which will separate the iterable elements once they are combined into a string.
+
+In the context of this algorithm, I employed the ```.join()``` method to transform the ip_addresses list into a string, which was then passed as an argument to the ```.write()``` method when updating the ```"allow_list.txt"``` file. To ensure each element appeared on a new line in the resulting text, I chose the string ```("\n")``` as the separator, instructing Python to maintain this formatting.
+
+The next set of code that I implemented, I employed a with statement and the .write() method to update the file:
+
+![Image](https://i.imgur.com/21pctgG.png)
+
+Here, I utilized an additional argument, ```"w"```, when using the ```open()``` function within my ```with``` statement. This particular argument signifies my intention to open a file for the purpose of overwriting its existing content. By employing ```"w"```, I gained the ability to employ the ```.write()``` function within the ```with``` statement's block. The ```.write()``` function is instrumental in writing string data to a specified file and replacing any pre-existing content.
+
+In this scenario, my objective was to write the updated allow list as a string to the file named ```"allow_list.txt."``` This approach ensures that the previously restricted content becomes inaccessible to any IP addresses that have been removed from the allow list. To achieve this, I added the ```.write()``` function to the file object, which I had defined within the with statement. As an argument, I passed the ```ip_addresses``` variable, thereby specifying that the contents of the file indicated in the with statement should be replaced with the data contained in this variable.
+
+## Summary
+
+I designed an algorithm to update the ```"allow_list.txt"``` file by removing any IP addresses present in a ```remove_list``` variable, which contains a list of unauthorized addresses. The algorithm consisted of several steps:
+
+1. First, I opened the ```"allow_list.txt"``` file for manipulation.
+2. Next, I converted the file's content into a string for further processing, and subsequently transformed this string into a list, storing it in a variable called ```ip_addresses```.
+3. I proceeded to iterate through the IP addresses listed in the ```remove_list```. During each iteration, I examined whether the element was present in the ```ip_addresses``` list.
+4. If the element was found in ```ip_addresses```, I employed the ```.remove()``` method to eliminate it from the list.
+5. Finally, to update the ```"allow_list.txt"``` file, I utilized the ```.join()``` method to convert the ```ip_addresses``` list back into a string. This enabled me to overwrite the contents of the file with the revised list of IP addresses, ensuring that unauthorized addresses were no longer included in the allow list.
